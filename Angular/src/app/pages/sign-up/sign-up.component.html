@@ -1,0 +1,56 @@
+<h2 routerLink="/login" routerLinkActive="active">Connexion</h2>
+<h2>Inscription</h2>
+
+<div>
+  <img src="/assets/img/team.png" alt="">
+</div>
+
+<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+
+  <!-- TYPE -->
+  <input type="radio" value="consumer" formControlName="type" required>
+  <label>Consumer</label>
+
+  <input type="radio" value="foodtruck" formControlName="type" required>
+  <label>Foodtruck</label>
+
+  <div *ngIf="submitted && signUpForm.controls.type.errors">
+    <label *ngIf="signUpForm.controls.type.errors.required">Ce champs est requis.</label>
+  </div>
+
+  <br>
+
+  <!-- EMAIL -->
+  <input type="text" placeholder="Email" formControlName="email" required>
+
+  <div *ngIf="submitted && signUpForm.controls.email.errors">
+    <label *ngIf="signUpForm.controls.email.errors.required">Ce champs est requis.</label>
+    <label *ngIf="signUpForm.controls.email.errors.pattern">L'adresse email n'est pas valide.</label>
+  </div>
+
+  <br>
+
+  <!-- PASSWORD -->
+  <input type="password" placeholder="Password" formControlName="password" required>
+
+  <div *ngIf="submitted && signUpForm.controls.password.errors">
+    <label *ngIf="signUpForm.controls.password.errors.required">Ce champs est requis.</label>
+    <label *ngIf="signUpForm.controls.password.errors.minlength">Le mot de passe doit contenir au minimum 4 caractères.</label>
+  </div>
+
+  <br>
+
+  <!-- SUBMIT -->
+  <input type="submit" value="Je m'inscris">
+
+</form>
+
+<!-- Sucess message -->
+<div class="sucess" *ngIf="showSucessMessage">
+  Save successfully
+</div>
+
+<!-- Error message -->
+<div class="alert" *ngIf="serverErrorMessages">
+  {{serverErrorMessages}}
+</div>

@@ -1,0 +1,37 @@
+<h2 routerLink="/signup" routerLinkActive="active">Inscription</h2>
+<h2>Connexion</h2>
+
+<div>
+  <img src="/assets/img/team.png" alt="">
+</div>
+
+<form [formGroup]="signInForm" (ngSubmit)="signIn()">
+
+  <!-- EMAIL -->
+  <input type="text" placeholder="Email" formControlName="email" required>
+
+  <div *ngIf="submitted && signInForm.controls.email.errors">
+    <label *ngIf="signInForm.controls.email.errors.required">Ce champs est requis.</label>
+    <label *ngIf="signInForm.controls.email.errors.pattern">L'adresse email n'est pas valide.</label>
+  </div>
+
+  <br>
+
+  <!-- PASSWORD -->
+  <input type="password" placeholder="Password" formControlName="password" required>
+
+  <div *ngIf="submitted && signInForm.controls.password.errors">
+    <label *ngIf="signInForm.controls.password.errors.required">Ce champs est requis.</label>
+  </div>
+
+  <br>
+
+  <!-- SUBMIT -->
+  <input type="submit" value="Je me connecte">
+
+</form>
+
+<!-- Error message -->
+<div *ngIf="serverErrorMessages">
+  {{ serverErrorMessages }}
+</div>
