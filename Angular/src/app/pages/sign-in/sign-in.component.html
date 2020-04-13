@@ -1,37 +1,45 @@
-<h2 routerLink="/signup" routerLinkActive="active">Inscription</h2>
-<h2>Connexion</h2>
+<div class="wrapper-flex">
+  <header>
+    <div>
+      <img src="/assets/img/logo.png" alt="">
+    </div>
+  </header>
 
-<div>
-  <img src="/assets/img/team.png" alt="">
+  <main>
+
+    <h1>CONNEXION</h1>
+
+    <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+
+      <!-- EMAIL -->
+      <input type="text" placeholder="Email *" formControlName="email" required>
+
+      <div class="error" *ngIf="submitted && signInForm.controls.email.errors">
+        <label *ngIf="signInForm.controls.email.errors.required">Ce champs est requis.</label>
+        <label *ngIf="signInForm.controls.email.errors.pattern">L'adresse email n'est pas valide.</label>
+      </div>
+
+      <!-- PASSWORD -->
+      <input type="password" placeholder="Password *" formControlName="password" required>
+
+      <div class="error" *ngIf="submitted && signInForm.controls.password.errors">
+        <label *ngIf="signInForm.controls.password.errors.required">Ce champs est requis.</label>
+      </div>
+
+      <!-- SUBMIT -->
+      <input type="submit" value="Se connecter">
+
+    </form>
+
+    <!-- Error message -->
+    <div *ngIf="serverErrorMessages">
+      {{ serverErrorMessages }}
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Tu n'as pas de compte ? <a routerLink="/signup">S'inscrire</a></p>
+  </footer>
 </div>
 
-<form [formGroup]="signInForm" (ngSubmit)="signIn()">
-
-  <!-- EMAIL -->
-  <input type="text" placeholder="Email" formControlName="email" required>
-
-  <div *ngIf="submitted && signInForm.controls.email.errors">
-    <label *ngIf="signInForm.controls.email.errors.required">Ce champs est requis.</label>
-    <label *ngIf="signInForm.controls.email.errors.pattern">L'adresse email n'est pas valide.</label>
-  </div>
-
-  <br>
-
-  <!-- PASSWORD -->
-  <input type="password" placeholder="Password" formControlName="password" required>
-
-  <div *ngIf="submitted && signInForm.controls.password.errors">
-    <label *ngIf="signInForm.controls.password.errors.required">Ce champs est requis.</label>
-  </div>
-
-  <br>
-
-  <!-- SUBMIT -->
-  <input type="submit" value="Je me connecte">
-
-</form>
-
-<!-- Error message -->
-<div *ngIf="serverErrorMessages">
-  {{ serverErrorMessages }}
-</div>

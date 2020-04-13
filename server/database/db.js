@@ -12,4 +12,12 @@ mongoose.connect(
   }
 );
 
-require('./user.model');
+// Call models
+require('./models/consumer.model');
+require('./models/dish.model');
+require('./models/favorite.model');
+require('./models/foodtruck.model');
+require('./models/menu.model');
+require('./models/picture.model');
+require('./models/review.model');
+require('./models/user.model');

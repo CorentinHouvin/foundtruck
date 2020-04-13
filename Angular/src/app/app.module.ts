@@ -16,7 +16,8 @@ import { UserService } from './shared/user.service';
 import { AuthGuard } from "./auth/auth.guard";
 import { AuthInterceptor } from "./auth/auth.interceptor";
 import { MapComponent } from './pages/map/map.component';
-import { MapboxComponent } from './pages/mapbox/mapbox.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MapboxComponent } from './pages/mapbox/mapbox.component';
     SignInComponent,
     UserProfileComponent,
     MapComponent,
-    MapboxComponent
+    DashboardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

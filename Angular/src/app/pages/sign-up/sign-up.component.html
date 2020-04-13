@@ -7,15 +7,15 @@
 
 <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
 
-  <!-- TYPE -->
-  <input type="radio" value="consumer" formControlName="type" required>
+  <!-- ROLE -->
+  <input type="radio" value="consumer" formControlName="role" required>
   <label>Consumer</label>
 
-  <input type="radio" value="foodtruck" formControlName="type" required>
+  <input type="radio" value="foodtruck" formControlName="role" required>
   <label>Foodtruck</label>
 
-  <div *ngIf="submitted && signUpForm.controls.type.errors">
-    <label *ngIf="signUpForm.controls.type.errors.required">Ce champs est requis.</label>
+  <div *ngIf="submitted && signUpForm.controls.role.errors">
+    <label *ngIf="signUpForm.controls.role.errors.required">Ce champs est requis.</label>
   </div>
 
   <br>

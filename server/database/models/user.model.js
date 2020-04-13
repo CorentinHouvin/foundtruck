@@ -13,7 +13,7 @@ var userSchema = new mongoose.Schema({
     required: "Le mot de passe est requis.",
     minlength: [4, 'Le mot de passe doit avoir minimum 4 caractères.']
   },
-  type: {
+  role: {
     type: String,
     required: "Le type d'utilisateur est requis",
   },

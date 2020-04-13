@@ -1,5 +1,31 @@
-<div class="map-container">
-  <div class="map-frame">
-    <div id="map"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapbox</title>
+</head>
+<body>
+
+  <header>
+    <a routerLink="/userprofile">Profile</a>
+  </header>
+
+  <div id="map"></div>
+
+  <div id="popup">
+    <h2></h2>
+    <p></p>
+    <button (click)="createRoute(foodtruckCoord)">Click</button>
   </div>
-</div>
+
+  <div>
+    <ul *ngFor="let foodtruck of foodtrucks">
+      <li>{{ foodtruck.name }}</li>
+      <li>Longitude : {{ foodtruck.long }}</li>
+      <li>Latitude : {{ foodtruck.lat }}</li>
+    </ul>
+  </div>
+
+</body>
+</html>

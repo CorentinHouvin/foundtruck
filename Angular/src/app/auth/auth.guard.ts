@@ -9,6 +9,8 @@ import { Router } from "@angular/router"
 })
 export class AuthGuard implements CanActivate {
 
+  userDetails;
+
   constructor(private userService: UserService, private router: Router){}
 
   canActivate(
@@ -18,8 +20,21 @@ export class AuthGuard implements CanActivate {
         this.router.navigateByUrl('/login');
         this.userService.deleteToken();
         return false;
+      } else {
+        this.userService.getUserProfile().subscribe(
+          res => {
+            this.userDetails = res['user'];
+            if (next.data.roles && next.data.roles.indexOf(this.userDetails.role) === -1) {
+              this.router.navigateByUrl('/login');
+              this.userService.deleteToken();
+              return false;
+            }
+          },
+          err => { }
+        );
+
+        return true;
       }
-    return true;
   }
 
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 
 import { UserService } from 'src/app/shared/user.service';
+import { NavbarService } from 'src/app/shared/navbar.service';
 
 
 @Component({
@@ -16,18 +17,33 @@ export class SignInComponent implements OnInit {
   public serverErrorMessages: string;
   public signInForm: FormGroup;
 
+  private userDetails;
+
   // Savoir si le formulaire est submit ou pas - par défaut => false
   public submitted = false;
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public nav: NavbarService
   ) { }
 
   ngOnInit(): void {
-    if(this.userService.isLoggedIn())
-      this.router.navigateByUrl('/mapbox');
+    this.nav.hide();
+    if(this.userService.isLoggedIn()) {
+      this.userService.getUserProfile().subscribe(
+        res => {
+          this.userDetails = res['user'];
+          if (this.userDetails.role == 'consumer')
+            this.router.navigateByUrl('/mapbox');
+          else if (this.userDetails.role == 'foodtruck')
+            this.router.navigateByUrl('/dashboard');
+        },
+        err => { }
+      );
+    }
+
 
     this.signInForm = this.fb.group({
       email: [undefined, [Validators.required, Validators.pattern(this.emailRegex)]],
@@ -40,7 +56,18 @@ export class SignInComponent implements OnInit {
       this.userService.login(this.signInForm.value).subscribe(
         res => {
           this.userService.setToken(res['token']);
-          this.router.navigateByUrl('/mapbox');
+
+          this.userService.getUserProfile().subscribe(
+            res => {
+              this.userDetails = res['user'];
+              if (this.userDetails.role == 'consumer')
+                this.router.navigateByUrl('/mapbox');
+              else if (this.userDetails.role == 'foodtruck')
+                this.router.navigateByUrl('/dashboard');
+            },
+            err => { }
+          );
+
         },
         err => {
           this.serverErrorMessages = err.error.message;

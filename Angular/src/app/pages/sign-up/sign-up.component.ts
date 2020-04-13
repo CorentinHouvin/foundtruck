@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from 'src/app/shared/user.service';
+import { NavbarService } from 'src/app/shared/navbar.service';
 
 
 @Component({
@@ -21,13 +22,16 @@ export class SignUpComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    public nav: NavbarService
   ) { }
 
   ngOnInit(): void {
+    this.nav.hide();
+
     this.signUpForm = this.fb.group({
       email: [undefined, [Validators.required, Validators.pattern(this.emailRegex)]],
       password: [undefined, [Validators.required, Validators.minLength(4)]],
-      type: [undefined, Validators.required]
+      role: [undefined, Validators.required]
     });
   }
 

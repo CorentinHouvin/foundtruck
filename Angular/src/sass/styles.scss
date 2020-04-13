@@ -1,0 +1,123 @@
+@import './reset';
+@import './variables';
+@import './mixins';
+
+@font-face {
+  font-family: "MPLUSRounded1c";
+  src: url("/assets/font/MPLUSRounded1c-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "MPLUSRounded1c";
+  src: url("/assets/font/MPLUSRounded1c-Bold.ttf");
+  font-weight: 700;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  max-width: 375px;
+  margin: 0 auto;
+  font-family: 'MPLUSRounded1c';
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+body#login {
+  div.wrapper-flex {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  header {
+    background-image: url("/assets/img/ellipse.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center 0;
+    text-align: center;
+    padding-top: 15px;
+    div {
+      width: 180px;
+      height: 180px;
+      background-color: #fff;
+      border-radius: 100%;
+      margin: 0 auto;
+      img {
+        width: 150px;
+        margin-top: 30px;
+      }
+    }
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h1 {
+      text-align: center;
+      color: $orange;
+      font-weight: 700;
+    }
+    form {
+      text-align: center;
+      input {
+        width: 230px;
+        margin-top: 60px;
+        text-align: center;
+        padding: 12px 0;
+        font-weight: 700;
+        &[type=text], &[type=password] {
+          border: none;
+          border-bottom: 1px solid $gris-clair;
+          color: $gris-clair;
+          outline: none;
+          &::placeholder {
+            color: $gris-clair;
+          }
+        }
+        &[type=submit] {
+          border: none;
+          border-radius: 20px;
+          background-color: $orange;
+          color: $gris;
+          cursor: pointer;
+        }
+      }
+      div.error {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 10px;
+        color: $rouge;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  footer {
+    text-align: center;
+    padding: 50px;
+    p {
+      font-weight: 700;
+      color: $gris;
+      a {
+        text-decoration: none;
+        color: $orange;
+      }
+    }
+  }
+}
+
+// @media (min-width:320px)  { body{background-color: red;}/* smartphones, iPhone, portrait 480x320 phones */ }
+// @media (min-width:481px)  { body{background-color: blue;}/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+// @media (min-width:641px)  { body{background-color: yellow;}/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+// @media (min-width:961px)  { body{background-color: green;}/* tablet, landscape iPad, lo-res laptops ands desktops */ }
+// @media (min-width:1025px) { body{background-color: purple;}/* big landscape tablets, laptops, and desktops */ }
+// @media (min-width:1281px) { body{background-color: orange;}/* hi-res laptops and desktops */ }
