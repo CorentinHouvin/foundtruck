@@ -17,7 +17,7 @@ export class AppComponent {
         if (event instanceof NavigationStart) {
           if (this.previousUrl) {
             //this.renderer.removeClass(document.body, this.previousUrl);
-            this.renderer.setProperty(document.body, 'id', this.previousUrl);
+           this.renderer.setProperty(document.body, 'id', this.previousUrl);
           }
           let currentUrlSlug = event.url.slice(1)
           if (currentUrlSlug) {

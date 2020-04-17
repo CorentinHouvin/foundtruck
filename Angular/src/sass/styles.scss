@@ -14,27 +14,153 @@
   font-weight: 700;
 }
 
+$width-page: 345px;
+$padding-page: 30px;
+
 html {
   font-size: 62.5%;
 }
 
 body {
-  max-width: 375px;
-  margin: 0 auto;
   font-family: 'MPLUSRounded1c';
   font-size: 1.5rem;
+
+  position: relative;
+  // border-left:1px solid #333;
+  // border-right:1px solid #333;
+  max-width: $width-page;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 0 $padding-page;
 }
 
 h2 {
   font-size: 1.8rem;
 }
 
-body#login {
+nav {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: #FFF;
+  z-index: 1;
+  border-top: 2px solid #DCDCDC;
+  ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 $padding-page;
+    li {
+      padding: 15px 0;
+      &.active {
+        position: relative;
+        &:before {
+          display: block;
+          position:absolute;
+          content:" ";
+          width: 32px;
+          height: 2px;
+          background-color: $orange;
+          top: -2px;
+          left:50%;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+}
+
+body#accueil {
+  header {
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    img {
+      &:first-of-type {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+      &:last-of-type {
+        height: 50px;
+      }
+    }
+  }
+
+  div.aside {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #000000, $alpha: .1);
+    z-index: 2;
+    overflow: hidden;
+    visibility: hidden;
+    transition: visibility .5s;
+    aside {
+      width: 200px;
+      height: calc( 100vh - 40px );
+      background-color: #FFF;
+      position: absolute;
+      top: 0;
+      left: -240px;
+      transition: left .5s;
+      padding: 20px;
+      img:first-of-type {
+        float:left;
+        border: 2px solid $orange;
+        padding: 10px;
+        border-radius: 100%;
+      }
+      img:last-of-type {
+        float:right;
+      }
+      .btn-logout {
+        font-size: 1.1rem;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        background-color: $orange;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+    }
+    &.open {
+      visibility: visible;
+      aside {
+        left: 0;
+      }
+    }
+  }
+
+  main {
+    p:first-of-type {
+      font-size: 1.8rem;
+      font-weight: bold;
+      span {
+        color: $orange;
+      }
+    }
+    p:last-of-type {
+      font-size: 1rem;
+    }
+  }
+}
+
+body#login, body#signup {
+  max-width: 375px;
+  padding: 0;
   div.wrapper-flex {
     display: flex;
     flex-direction: column;
     height: 100vh;
   }
+
   header {
     background-image: url("/assets/img/ellipse.png");
     background-repeat: no-repeat;
@@ -66,13 +192,17 @@ body#login {
       font-weight: 700;
     }
     form {
+      width: 230px;
+      margin: 0 auto;
       text-align: center;
       input {
-        width: 230px;
         margin-top: 60px;
-        text-align: center;
-        padding: 12px 0;
         font-weight: 700;
+        &:not([type=radio]) {
+          width: 100%;
+          text-align: center;
+          padding: 12px 0;
+        }
         &[type=text], &[type=password] {
           border: none;
           border-bottom: 1px solid $gris-clair;
@@ -88,6 +218,9 @@ body#login {
           background-color: $orange;
           color: $gris;
           cursor: pointer;
+        }
+        &:focus::placeholder {
+          color: transparent;
         }
       }
       div.error {
@@ -112,6 +245,29 @@ body#login {
         color: $orange;
       }
     }
+  }
+}
+
+body#map {
+  max-width: 375px;
+  padding: 0;
+  div#mapbox {
+    width: 100%;
+    height: 100vh;
+  }
+  #popup {
+    background-color: #FFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    width: 80%;
+
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 10px;
+    display: none;
   }
 }
 

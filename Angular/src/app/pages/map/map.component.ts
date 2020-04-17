@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from "src/environments/environment";
 import * as mapboxgl from "mapbox-gl";
-import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
+//import MapboxDirections from "@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions";
 
 import * as $ from "jquery";
 
-import { UserService } from 'src/app/shared/user.service';
-import { ArrayType } from '@angular/compiler';
+import { UserService } from 'src/app/services/user.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: "app-map",
-  templateUrl: "./map.component.html",
-  styleUrls: ["./map.component.scss"],
+  templateUrl: "./map.component.html"
 })
 export class MapComponent implements OnInit {
 
@@ -25,8 +24,9 @@ export class MapComponent implements OnInit {
   public foodtrucks;
   public foodtruckCoord;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private nav: NavbarService) {
     mapboxgl.accessToken = environment.mapbox.accessToken;
+    this.nav.show();
   }
 
   ngOnInit(): void {
@@ -76,7 +76,7 @@ export class MapComponent implements OnInit {
 
     // Create the map
     this.map = new mapboxgl.Map({
-      container: "map",
+      container: "mapbox",
       style: "mapbox://styles/corentinhouvin/ck8q6o3hq15et1ik7eekmfq2j",
       zoom: 15.5,
     });
@@ -265,7 +265,7 @@ export class MapComponent implements OnInit {
 
           this.foodtruckCoord = [marker.geometry.coordinates[0], marker.geometry.coordinates[1]];
 
-          $("#map").append($("#popup"));
+          $("#mapbox").append($("#popup"));
           $("#popup").show();
         });
 

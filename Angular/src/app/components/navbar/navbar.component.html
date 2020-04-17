@@ -1,1 +1,24 @@
-<p *ngIf="nav.visible">navbar works!</p>
+<nav *ngIf="nav.visible">
+  <ul>
+    <li routerLinkActive="active">
+      <a routerLink="/accueil">
+        <img src="/assets/img/nav/home.png" alt="">
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/map">
+        <img src="/assets/img/nav/map.png" alt="">
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/recherche">
+        <img src="/assets/img/nav/search.png" alt="">
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/favoris">
+        <img src="/assets/img/nav/favorite.png" alt="">
+      </a>
+    </li>
+  </ul>
+</nav>

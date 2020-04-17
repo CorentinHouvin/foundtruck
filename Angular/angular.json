@@ -29,18 +29,11 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images/",
-                "output": "./assets"
-              },
-              {
-                "glob": "**/*",
-                "input": "node_modules/leaflet/dist/images/",
-                "output": "./assets"
+                "output": "./assets/img/leafleft"
               }
             ],
             "styles": [
               "src/sass/styles.scss",
-              "node_modules/leaflet/dist/leaflet.css",
-              "node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css",
               "node_modules/mapbox-gl/dist/mapbox-gl.css",
               "node_modules/@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css"
             ],
@@ -108,7 +101,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/sass/styles.scss"
             ],
             "scripts": []
           }

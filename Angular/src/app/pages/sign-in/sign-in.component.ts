@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 
-import { UserService } from 'src/app/shared/user.service';
-import { NavbarService } from 'src/app/shared/navbar.service';
+import { UserService } from 'src/app/services/user.service';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 
 @Component({
   selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  templateUrl: './sign-in.component.html'
 })
 export class SignInComponent implements OnInit {
 
@@ -36,7 +35,7 @@ export class SignInComponent implements OnInit {
         res => {
           this.userDetails = res['user'];
           if (this.userDetails.role == 'consumer')
-            this.router.navigateByUrl('/mapbox');
+            this.router.navigateByUrl('/accueil');
           else if (this.userDetails.role == 'foodtruck')
             this.router.navigateByUrl('/dashboard');
         },
@@ -61,7 +60,7 @@ export class SignInComponent implements OnInit {
             res => {
               this.userDetails = res['user'];
               if (this.userDetails.role == 'consumer')
-                this.router.navigateByUrl('/mapbox');
+                this.router.navigateByUrl('/accueil');
               else if (this.userDetails.role == 'foodtruck')
                 this.router.navigateByUrl('/dashboard');
             },

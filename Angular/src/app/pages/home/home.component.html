@@ -1,0 +1,23 @@
+<header>
+  <img (click)="toggleAside()"src="/assets/img/burger.png" alt="">
+  <img src="/assets/img/logo.png" alt="">
+</header>
+
+<div class="aside" [ngClass]="{'open': seeAside}" (click)="checkAside()">
+  <aside (click)="$event.stopPropagation()">
+
+    <img src="/assets/img/user.png" alt="">
+    <p>{{ consumerDetails.first_name }}<br>{{ consumerDetails.last_name }}</p>
+    <img (click)="toggleAside()" src="/assets/img/close.png" alt="">
+
+    <a class="btn-logout">Déconnexion</a>
+  </aside>
+</div>
+
+
+
+<main>
+  <p>Salut <span *ngIf="consumerDetails">{{ consumerDetails.first_name }}</span> !</p>
+  <p>Qu'est-ce qu'on mange aujourd'hui ?</p>
+</main>
+
