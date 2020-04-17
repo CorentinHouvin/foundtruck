@@ -7,7 +7,7 @@
   <aside (click)="$event.stopPropagation()">
 
     <img src="/assets/img/user.png" alt="">
-    <p>{{ consumerDetails.first_name }}<br>{{ consumerDetails.last_name }}</p>
+    <p *ngIf="consumerDetails">{{ consumerDetails.first_name }}<br>{{ consumerDetails.last_name }}</p>
     <img (click)="toggleAside()" src="/assets/img/close.png" alt="">
 
     <a class="btn-logout">Déconnexion</a>

@@ -25,6 +25,10 @@ app.set("view engine", "html");
 app.set('views', __dirname + '/www');
 app.use(express.static(path.join(__dirname, 'www')));
 
+app.get('*', function (req, res) {
+    res.sendFile(__dirname + '/www/');
+});
+
 // error handler
 app.use((err, req, res, next) => {
     if (err.name === 'ValidationError') {
