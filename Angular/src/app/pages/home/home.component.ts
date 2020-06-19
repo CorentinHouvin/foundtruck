@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 import { NavbarService } from 'src/app/services/navbar.service';
 import { UserService } from 'src/app/services/user.service';
+import { ConsumerService } from 'src/app/services/consumer.service';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +14,14 @@ export class HomeComponent implements OnInit {
   public consumerDetails;
   public seeAside;
 
-  constructor(private userService: UserService, private nav: NavbarService) {
+  constructor(
+    private userService: UserService,
+    private consumerService: ConsumerService,
+    private nav: NavbarService,
+    private router: Router
+  ) {
     this.nav.show();
-    this.userService.getConsumer().subscribe(
+    this.consumerService.getConsumer().subscribe(
       res => {
         console.log(res);
         this.consumerDetails = res['consumer'];
@@ -35,5 +42,10 @@ export class HomeComponent implements OnInit {
     if (this.seeAside) {
       this.seeAside = !this.seeAside;
     }
+  }
+
+  onLogout() {
+    this.userService.deleteToken();
+    this.router.navigate(['/login']);
   }
 }

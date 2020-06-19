@@ -5,7 +5,7 @@ import * as mapboxgl from "mapbox-gl";
 
 import * as $ from "jquery";
 
-import { UserService } from 'src/app/services/user.service';
+import { FoodtruckService } from 'src/app/services/foodtruck.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
@@ -23,8 +23,14 @@ export class MapComponent implements OnInit {
   // Public declarations
   public foodtrucks;
   public foodtruckCoord;
+  public slugActiveFoodtruck;
+  public idActiveFoodtruck;
+  public routeActive: Boolean = false;
 
-  constructor(private userService: UserService, private nav: NavbarService) {
+  constructor(
+    private foodtruckService: FoodtruckService,
+    private nav: NavbarService
+  ) {
     mapboxgl.accessToken = environment.mapbox.accessToken;
     this.nav.show();
   }
@@ -32,28 +38,32 @@ export class MapComponent implements OnInit {
   ngOnInit(): void {
 
     // Get all foodtrucks
-    this.userService.getFoodtrucks().subscribe(
+    this.foodtruckService.getFoodtrucks().subscribe(
       (res) => {
         this.foodtrucks = res["foodtrucks"];
         let featuresFromFoodtrucks = [];
 
         this.foodtrucks.forEach(foodtruck => {
-          let obj;
+          if (foodtruck.open) {
+            let obj;
 
-          obj = {
-            type: "Feature",
-            properties: {
-              message: foodtruck.name,
-              iconSize: [60, 60],
-              iconUrl: "url(" + foodtruck.logo + ")",
-            },
-            geometry: {
-              type: "Point",
-              coordinates: [foodtruck.long, foodtruck.lat],
+            obj = {
+              type: "Feature",
+              properties: {
+                _id: foodtruck._id,
+                name: foodtruck.name,
+                slug: foodtruck.slug,
+                iconSize: [60, 60],
+                iconUrl: "url(" + foodtruck.logo + ")",
+              },
+              geometry: {
+                type: "Point",
+                coordinates: [foodtruck.long, foodtruck.lat],
+              }
             }
-          }
 
-          featuresFromFoodtrucks.push(obj);
+            featuresFromFoodtrucks.push(obj);
+          }
         });
 
         this.geojson = {
@@ -129,11 +139,23 @@ export class MapComponent implements OnInit {
         },
         paint: {
           "circle-radius": 10,
-          "circle-color": "#f30",
+          "circle-color": "#1aafc9",
         },
       });
     }
     this.getRoute(foodtruckCoord, this.map);
+
+    $('#popup').hide();
+    $('#popup-trajet').show();
+
+    this.routeActive = true;
+  }
+
+  public cancelRoute = () => {;
+    $('#popup-trajet').hide();
+    this.routeActive = false;
+    // Génère une route sur le point de départ, du coup on ne la voit pas
+    this.getRoute(this.start, this.map);
   }
 
   // create a function to make a directions request
@@ -197,7 +219,7 @@ export class MapComponent implements OnInit {
             "line-cap": "round",
           },
           paint: {
-            "line-color": "#3887be",
+            "line-color": "#f9b233",
             "line-width": 5,
             "line-opacity": 0.75,
           },
@@ -235,7 +257,7 @@ export class MapComponent implements OnInit {
       },
       paint: {
         "circle-radius": 10,
-        "circle-color": "#3887be",
+        "circle-color": "#1aafc9",
       },
     });
 
@@ -255,20 +277,36 @@ export class MapComponent implements OnInit {
 
       $(icon).on("click", () => {
 
-        const promise = this.getInfoRoute(this.start, end);
-        promise.then((res) => {
+        if (!this.routeActive) {
+          console.log('Route = false');
+          const promise = this.getInfoRoute(this.start, end);
+          promise.then((res) => {
 
-          let infosRoute: any = res;
+            let infosRoute: any = res;
 
-          $("#popup h2").text(marker.properties.message);
-          $("#popup p").text("Distance: " + infosRoute.distance + "<br>Time: " + infosRoute.duration);
+            if (marker.properties.name == 'Foodtruck #1') {
+              $("#popup").addClass("foodtruck1").removeClass("foodtruck2");
+            } else if (marker.properties.name == 'Foodtruck #2') {
+              $("#popup").addClass("foodtruck2").removeClass("foodtruck1");
+            }
 
-          this.foodtruckCoord = [marker.geometry.coordinates[0], marker.geometry.coordinates[1]];
+            $("#popup h2").text(marker.properties.name);
+            $("#popup div.distance span").text(infosRoute.distance);
+            $("#popup div.time span").text(infosRoute.duration);
 
-          $("#mapbox").append($("#popup"));
-          $("#popup").show();
-        });
+            $("#popup-trajet div.distance span").text(infosRoute.distance);
+            $("#popup-trajet div.time span").text(infosRoute.duration);
+            $("#popup-trajet div.step span").text(infosRoute.firstStep);
 
+            this.idActiveFoodtruck = marker.properties._id;
+            this.slugActiveFoodtruck = marker.properties.slug;
+
+            this.foodtruckCoord = [marker.geometry.coordinates[0], marker.geometry.coordinates[1]];
+
+            $("#mapbox").append($("#popup"));
+            $("#popup").show();
+          });
+        }
       });
 
       // add marker to map
@@ -303,9 +341,12 @@ export class MapComponent implements OnInit {
         else
           distance = distanceMeter + "m";
 
+        let firstStep = data.legs[0].steps[1].maneuver.instruction;
+
         let infoRoute: Object = {
           'duration': dateGoodFormat,
-          'distance': distance
+          'distance': distance,
+          'firstStep': firstStep
         }
         resolve(infoRoute);
       }

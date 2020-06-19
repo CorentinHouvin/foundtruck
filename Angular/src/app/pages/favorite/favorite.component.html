@@ -1,1 +1,18 @@
-<p>favorite works!</p>
+<main>
+  <h1>Mes <span>favoris</span></h1>
+  <p>Retrouve l'ensemble des fooddtrucks que tu as ajoutés à tes favoris. </p>
+
+  <div *ngIf="foodtrucks">
+    <div class="card" *ngFor="let foodtruck of foodtrucks">
+      <div class="header">
+        <p>{{ foodtruck.name }}</p>
+        <img src="/assets/img/category/pizza.png" alt="">
+        <img src="/assets/img/category/burger.png" alt="">
+      </div>
+      <div class="button">
+        <a [routerLink]="['/recherche', foodtruck.slug]" [queryParams]="{_id: foodtruck._id}"><img
+            src="/assets/img/plus.png" alt=""></a>
+      </div>
+    </div>
+  </div>
+</main>

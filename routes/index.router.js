@@ -19,7 +19,10 @@ router.get('/consumerProfile', jwtHelper.verifyJwtToken, ctrlConsumer.consumerPr
 
 // FOODTRUCK ROUTES
 router.post('/registerFoodtruck', ctrlUser.register, ctrlFoodtruck.register);
+router.get('/allFoodtrucks', jwtHelper.verifyJwtToken, ctrlFoodtruck.allFoodtrucks);
 router.get('/foodtruckProfile', jwtHelper.verifyJwtToken, ctrlFoodtruck.foodtruckProfile);
+router.patch('/toggleFoodtruckOpen', jwtHelper.verifyJwtToken, ctrlFoodtruck.toggleFoodtruckOpen);
+router.get('/foodtruckDetail', jwtHelper.verifyJwtToken, ctrlFoodtruck.getFoodtruckDetail);
 
 // MENU ROUTES
 

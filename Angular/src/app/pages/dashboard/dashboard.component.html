@@ -1,3 +1,21 @@
 <header>
-  <a routerLink="/userprofile">Profile</a>
+  <img (click)="toggleAside()" src="/assets/img/burger.png" alt="">
+  <img src="/assets/img/logo.png" alt="">
 </header>
+
+<div class="aside" [ngClass]="{'open': seeAside}" (click)="checkAside()">
+  <aside (click)="$event.stopPropagation()">
+
+    <img src="/assets/img/user.png" alt="">
+    <p *ngIf="foodtruckDetails">{{ foodtruckDetails.name }}</p>
+    <img (click)="toggleAside()" src="/assets/img/close.png" alt="">
+
+    <a class="btn-logout" (click)="onLogout()">Déconnexion</a>
+  </aside>
+</div>
+
+<main>
+  <button *ngIf="foodtruckDetails" [ngClass]="{'open': foodtruckDetails.open}" (click)="toggleOpen()">
+    {{buttonText}}
+  </button>
+</main>

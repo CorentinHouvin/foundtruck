@@ -1,5 +1,6 @@
 <div class="wrapper-flex">
   <header>
+    <div></div>
     <div>
       <img src="/assets/img/logo.png" alt="">
     </div>
@@ -12,11 +13,15 @@
     <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
 
       <!-- ROLE -->
-      <input type="radio" value="consumer" formControlName="role" id="consumer" required>
-      <label for="consumer">Consommateur</label>
+      <label for="consumer" class="label-radio">
+        <input type="radio" value="consumer" formControlName="role" id="consumer" required>
+        Consommateur
+      </label>
 
-      <input type="radio" value="foodtruck" formControlName="role" id="foodtruck" required>
-      <label for="foodtruck">Foodtruck</label>
+      <label for="foodtruck" class="label-radio">
+        <input type="radio" value="foodtruck" formControlName="role" id="foodtruck" required>
+        Foodtruck
+      </label>
 
       <div class="error" *ngIf="submitted && signUpForm.controls.role.errors">
         <label *ngIf="signUpForm.controls.role.errors.required">Ce champs est requis.</label>

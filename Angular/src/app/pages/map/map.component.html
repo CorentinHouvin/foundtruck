@@ -1,19 +1,59 @@
 <div id="mapbox"></div>
+
 <div id="popup">
-  <h2></h2>
-  <p></p>
-  <button (click)="createRoute(foodtruckCoord)">Click</button>
+  <div>
+    <h2></h2>
+  </div>
+
+  <a [routerLink]="['/recherche', slugActiveFoodtruck]" [queryParams]="{_id: idActiveFoodtruck}">
+    <img src="/assets/img/loupe.png" alt="">
+  </a>
+
+  <div>
+    <div class="category">
+      <p>Catégorie</p>
+      <img src="" alt="">
+    </div>
+
+    <div class="rating">
+      <p>Avis</p>
+      <img src="" alt="">
+      <img src="" alt="">
+      <img src="" alt="">
+      <img src="" alt="">
+      <img src="" alt="">
+    </div>
+
+    <div class="distance">
+      <p>Distance</p>
+      <span></span>
+    </div>
+
+    <div class="time">
+      <p>Temps</p>
+      <span></span>
+    </div>
+
+    <button (click)="createRoute(foodtruckCoord)">J'y vais <img src="/assets/img/cursor.png" alt=""></button>
+  </div>
 </div>
 
-<!-- <div>
-  <ul *ngFor="let foodtruck of foodtrucks">
-    <li>{{ foodtruck.name }}</li>
-    <li>Longitude : {{ foodtruck.long }}</li>
-    <li>Latitude : {{ foodtruck.lat }}</li>
-  </ul>
-</div>
+<div id="popup-trajet">
+  <div class="distance">
+    <p>Distance restante</p>
+    <span></span>
+  </div>
 
-<header>
-  <a routerLink="/userprofile">Profile</a>
-</header> -->
+  <div class="time">
+    <p>Temps restant</p>
+    <span></span>
+  </div>
+
+  <div class="step">
+    <p>Prochaine étape</p>
+    <span></span>
+  </div>
+
+  <button (click)="cancelRoute()">Annuler <img src="/assets/img/close-popup.png" alt=""></button>
+</div>
 

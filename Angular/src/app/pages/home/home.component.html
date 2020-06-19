@@ -10,14 +10,110 @@
     <p *ngIf="consumerDetails">{{ consumerDetails.first_name }}<br>{{ consumerDetails.last_name }}</p>
     <img (click)="toggleAside()" src="/assets/img/close.png" alt="">
 
-    <a class="btn-logout">Déconnexion</a>
+    <a class="btn-logout" (click)="onLogout()">Déconnexion</a>
   </aside>
 </div>
-
-
 
 <main>
   <p>Salut <span *ngIf="consumerDetails">{{ consumerDetails.first_name }}</span> !</p>
   <p>Qu'est-ce qu'on mange aujourd'hui ?</p>
+
+  <section class="category">
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/pizza.png" alt="">
+      <p>Pizzas</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/pasta.png" alt="">
+      <p>Italiens</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/burger.png" alt="">
+      <p>Burger</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/ice-cream.png" alt="">
+      <p>Glace</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/ramen.png" alt="">
+      <p>Japonais</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/rice.png" alt="">
+      <p>Asiatique</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/french-fries.png" alt="">
+      <p>Américain</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/lettuce.png" alt="">
+      <p>Salade</p>
+    </div>
+  </section>
+
+  <section class="command">
+    <h2>Suivre l'évolution de ma commande</h2>
+    <div>
+      <input type="text" placeholder="#ID de ma commande">
+      <button>Suivre</button>
+    </div>
+  </section>
+
+  <section class="foodtruck_week">
+    <h2>Le foodtruck de la semaine</h2>
+    <a href="">Voir tout</a>
+
+    <div class="card">
+      <div class="header">
+        <p>Union Wine Co.</p>
+        <img src="/assets/img/category/pizza.png" alt="">
+        <img src="/assets/img/category/burger.png" alt="">
+      </div>
+      <div class="button">
+        <img src="/assets/img/plus.png" alt="">
+      </div>
+    </div>
+
+  </section>
+
+  <section class="favorite">
+    <h2>Mes foodtrucks préférés</h2>
+    <a href="">Voir tout</a>
+    <div class="card">
+      <div class="header">
+        <p>Union Wine Co.</p>
+        <img src="/assets/img/category/pizza.png" alt="">
+        <img src="/assets/img/category/burger.png" alt="">
+      </div>
+      <div class="button">
+        <img src="/assets/img/plus.png" alt="">
+      </div>
+    </div>
+  </section>
 </main>
 

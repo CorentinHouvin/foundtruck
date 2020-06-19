@@ -14,9 +14,6 @@
   font-weight: 700;
 }
 
-$width-page: 345px;
-$padding-page: 30px;
-
 html {
   font-size: 62.5%;
 }
@@ -24,32 +21,25 @@ html {
 body {
   font-family: 'MPLUSRounded1c';
   font-size: 1.5rem;
-
-  position: relative;
-  // border-left:1px solid #333;
-  // border-right:1px solid #333;
-  max-width: $width-page;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 0 $padding-page;
 }
 
 h2 {
   font-size: 1.8rem;
 }
 
+// NAV
 nav {
   width: 100%;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   background-color: #FFF;
-  z-index: 1;
+  z-index: 2;
   border-top: 2px solid #DCDCDC;
   ul {
     display: flex;
     justify-content: space-between;
-    padding: 0 $padding-page;
+    padding: 0 $padding-x-page;
     li {
       padding: 15px 0;
       &.active {
@@ -70,7 +60,10 @@ nav {
   }
 }
 
-body#accueil {
+// ACCUEIL / DASHBOARD
+body#accueil, body#dashboard {
+  padding: 0 $padding-x-page;
+  margin-bottom: 65px;
   header {
     text-align: center;
     padding: 20px;
@@ -96,7 +89,7 @@ body#accueil {
     top: 0;
     left: 0;
     background-color: rgba($color: #000000, $alpha: .1);
-    z-index: 2;
+    z-index: 3;
     overflow: hidden;
     visibility: hidden;
     transition: visibility .5s;
@@ -149,38 +142,286 @@ body#accueil {
     p:last-of-type {
       font-size: 1rem;
     }
+    section {
+      h2 {
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+    }
+    section.category {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      padding: 25px 0;
+      > div {
+        display: inline-block;
+        margin-right: 25px;
+        background-color: $orange;
+        border-radius: 10px;
+        border:1px solid $orange;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        z-index: -1;
+        div {
+          background-color: #FFF;
+          width:70px;
+          height:50px;
+          position: absolute;
+          top:-12px;
+          left: 50%;
+          transform: translateX(-50%);
+          -webkit-border-radius: 100% / 50px;
+          -moz-border-radius:    100% / 50px;
+          border-radius:         100% / 50px;
+          z-index: -1;
+        }
+        img {
+          padding: 2px 7px;
+        }
+        p {
+          padding: 10px 0;
+          font-size: 1.1rem;
+          font-weight: bold;
+        }
+      }
+    }
+    section.command {
+      div {
+        padding: 20px;
+        border: 1px solid $gris-clair;
+        border-radius: 10px;
+        margin-top: 20px;
+        text-align: center;
+      }
+      input[type=text] {
+        border: none;
+        border-bottom: 1px solid $gris-clair;
+        color: $gris-clair;
+        outline: none;
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px 0;
+        font-weight: 700;
+        &::placeholder {
+          color: $gris-clair;
+        }
+      }
+      button {
+        margin-top: 20px;
+        padding: 5px 20px;
+        border: none;
+        border-radius: 20px;
+        background-color: $orange;
+        color: $gris;
+        font-size: 1.4rem;
+        cursor: pointer;
+        font-weight: 700;
+      }
+    }
+    section.foodtruck_week {
+      margin-top: 25px;
+      overflow: hidden;
+      h2 {
+        float: left;
+      }
+      a {
+        float: right;
+        color: $bleu-clair;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        margin-top: 4px;
+      }
+      div.card {
+        margin-top: 50px;
+        width: 100%;
+        height: 180px;
+        background: black url("/assets/img/foodtruck_2.jpg") center center no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        border-radius: 10px;
+        overflow: hidden;
+        div.header {
+          position: absolute;
+          margin-top: -15px;
+          margin-left: 15px;
+          p, img {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+          }
+          p {
+            background-color: $orange;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: .9rem;
+          }
+          img {
+            width: 20px;
+            background-color: $bleu-clair;
+            border-radius: 100%;
+            padding: 5px;
+          }
+        }
+        div.button {
+          width: 200px;
+          height: 300px;
+          background-color: $orange;
+          float: right;
+          position: relative;
+          margin-top: -62.5px;
+          margin-right: -150px;
+          -webkit-border-radius: 100% / 500px;
+          -moz-border-radius:    100% / 500px;
+          border-radius:         100% / 500px;
+          img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            width: 20px;
+            left: 15px;
+          }
+        }
+      }
+    }
+    section.favorite {
+      margin-top: 25px;
+      h2 {
+        float: left;
+      }
+      a {
+        float: right;
+        color: $bleu-clair;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        margin-top: 4px;
+      }
+      div.card {
+        margin-top: 50px;
+        margin-bottom: 25px;
+        width: 60%;
+        height: 100px;
+        background: black url("/assets/img/foodtruck_2.jpg") center center no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        border-radius: 10px;
+        overflow: hidden;
+        display: inline-block;
+        div.header {
+          position: absolute;
+          margin-top: -15px;
+          margin-left: 15px;
+          p, img {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+          }
+          p {
+            background-color: $orange;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: .9rem;
+          }
+          img {
+            width: 15px;
+            background-color: $bleu-clair;
+            border-radius: 100%;
+            padding: 5px;
+          }
+        }
+        div.button {
+          width: 200px;
+          height: 220px;
+          background-color: $orange;
+          float: right;
+          position: relative;
+          margin-top: -62.5px;
+          margin-right: -165px;
+          -webkit-border-radius: 100% / 420px;
+          -moz-border-radius:    100% / 420px;
+          border-radius:         100% / 420px;
+          img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            width: 15px;
+            left: 10px;
+          }
+        }
+      }
+    }
   }
 }
 
+// DASHBOARD
+body#dashboard {
+  button {
+    padding: 20px;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    border:none;
+    background-color: $rouge;
+    outline: none;
+    font-weight: 700;
+    color: #FFF;
+    &.open {
+      background-color: green;
+    }
+  }
+}
+
+// LOGIN / SIGNUP
+$max-width-form: 230px;
 body#login, body#signup {
-  max-width: 375px;
-  padding: 0;
+  // Wrapper flex
   div.wrapper-flex {
     display: flex;
     flex-direction: column;
     height: 100vh;
   }
-
+  // Header
   header {
-    background-image: url("/assets/img/ellipse.png");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-position: center 0;
-    text-align: center;
     padding-top: 15px;
-    div {
+    position: relative;
+    overflow: hidden;
+    div:first-of-type {
+      position: absolute;
+      top:-40px;
+      left:0;
+      width: 130%;
+      height: 150px;
+      left: 50%;
+      transform: translateX(-50%);
+      -webkit-border-radius: 100% / 100px;
+      -moz-border-radius:    100% / 100px;
+      border-radius:         100% / 100px;
+      background-color: $orange;
+      z-index: -1;
+    }
+    div:last-of-type {
       width: 180px;
       height: 180px;
-      background-color: #fff;
+      background-color: #FFF;
       border-radius: 100%;
       margin: 0 auto;
+      text-align: center;
       img {
         width: 150px;
         margin-top: 30px;
       }
     }
   }
-
+  // Main
   main {
     flex: 1;
     display: flex;
@@ -192,11 +433,11 @@ body#login, body#signup {
       font-weight: 700;
     }
     form {
-      width: 230px;
+      max-width: $max-width-form;
       margin: 0 auto;
       text-align: center;
       input {
-        margin-top: 60px;
+        margin-top: 20%;
         font-weight: 700;
         &:not([type=radio]) {
           width: 100%;
@@ -219,9 +460,44 @@ body#login, body#signup {
           color: $gris;
           cursor: pointer;
         }
+        &[type=radio] {
+          -webkit-appearance: none;
+          width: 15px;
+          height: 15px;
+          background-color: #FFF;
+          border: 2px solid $orange;
+          border-radius: 100%;
+          vertical-align: bottom;
+          position: relative;
+          outline: none;
+          &:after {
+            content: '';
+            position: absolute;
+            background-color: transparent;
+            border-radius: 100%;
+            content: '';
+            top: -2px;
+            left: -2px;
+            height: 15px;
+            width: 15px;
+            position: absolute;
+            pointer-events: none;
+            overflow: hidden;
+
+          }
+          &:checked:after {
+            background-color: $orange;
+          }
+        }
         &:focus::placeholder {
           color: transparent;
         }
+      }
+      label.label-radio {
+        display: inline-block;
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin-top: 10px;
       }
       div.error {
         position: absolute;
@@ -233,10 +509,10 @@ body#login, body#signup {
       }
     }
   }
-
+  // Footer
   footer {
     text-align: center;
-    padding: 50px;
+    padding: 40px;
     p {
       font-weight: 700;
       color: $gris;
@@ -248,8 +524,8 @@ body#login, body#signup {
   }
 }
 
+// MAP
 body#map {
-  max-width: 375px;
   padding: 0;
   div#mapbox {
     width: 100%;
@@ -259,15 +535,352 @@ body#map {
     background-color: #FFF;
     border: 1px solid #E5E5E5;
     border-radius: 10px;
-    width: 80%;
-
+    width: calc(100% - (#{$padding-x-page} * 2));
+    height: 150px;
     position: absolute;
     bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
-
-    padding: 10px;
     display: none;
+    &.foodtruck1 {
+      > div:first-of-type {
+        background: black url("/assets/img/foodtruck_1.jpg") center center no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+       background-size: cover;
+      }
+    }
+    &.foodtruck2 {
+      > div:first-of-type {
+        background: black url("/assets/img/foodtruck_2.jpg") center center no-repeat;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+       background-size: cover;
+      }
+    }
+    > div:first-of-type {
+      background: black url("/assets/img/foodtruck_1.jpg") center center no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      width: 45%;
+      height: 150px;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      float: left;
+      position: relative;
+      text-align: center;
+      h2 {
+        display: inline-block;
+        width: 80%;
+        text-align: center;
+        background-color: $orange;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        position: relative;
+        top: -10px;
+      }
+    }
+    a {
+      position: absolute;
+      background-color: $orange;
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      z-index: 1;
+      text-align: center;
+      right: 10px;
+      margin-top: -10px;
+      img {
+        width: 10px;
+      }
+    }
+    > div:last-of-type {
+      width: 55%;
+      height: 150px;
+      float: right;
+      position: relative;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+      div {
+        overflow: hidden;
+        margin-left: 10px;
+        p {
+          float:left;
+          font-weight: 700;
+          color: $gris-clair;
+          font-size: 1.4rem;
+        }
+        span {
+          position: absolute;
+          left: 0;
+          margin-left: 80px;
+          font-weight: 700;
+          font-size: 1.4rem;
+        }
+      }
+      button {
+        width: 90px;
+        font-size: 1.2rem;
+        background-color: $orange;
+        text-align: center;
+        border: none;
+        margin-left: 10px;
+        border-radius: 10px;
+        font-weight: 700;
+        img {
+          width: 13px;
+          vertical-align: middle;
+        }
+      }
+
+    }
+  }
+  #popup-trajet {
+    background-color: #FFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    width: calc(100% - (#{$padding-x-page} * 2));
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    padding: 25px 10px;
+    div {
+      overflow: hidden;
+      margin-bottom: 20px;
+      p {
+        font-weight: 700;
+        color: $gris-clair;
+        font-size: 1.4rem;
+        float:left;
+      }
+      span {
+        position: absolute;
+        left: 0;
+        margin-left: 150px;
+        font-weight: 700;
+        font-size: 1.4rem;
+      }
+    }
+    button {
+        width: 90px;
+        font-size: 1.2rem;
+        background-color: $orange;
+        text-align: center;
+        border: none;
+        border-radius: 10px;
+        font-weight: 700;
+        img {
+          width: 13px;
+          vertical-align: middle;
+        }
+      }
+  }
+}
+
+body#recherche {
+  padding: 0 $padding-x-page;
+  margin-bottom: 65px;
+  h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 25px;
+    span {
+      color: $orange;
+    }
+  }
+  p:first-of-type {
+    font-size: 1rem;
+  }
+  form {
+    position: relative;
+    input {
+      width: 93%;
+      border:1px solid $gris-clair;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 700;
+      color: $gris-clair;
+      margin-top: 25px;
+      &::placeholder {
+        color: $gris-clair;
+      }
+    }
+    img {
+      position: absolute;
+      top: 35px;
+      right: 15px;
+      width: 20px;
+    }
+  }
+  section.category {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      padding: 25px 0;
+      > div {
+        display: inline-block;
+        margin-right: 25px;
+        background-color: $orange;
+        border-radius: 10px;
+        border:1px solid $orange;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        z-index: -1;
+        div {
+          background-color: #FFF;
+          width:70px;
+          height:50px;
+          position: absolute;
+          top:-12px;
+          left: 50%;
+          transform: translateX(-50%);
+          -webkit-border-radius: 100% / 50px;
+          -moz-border-radius:    100% / 50px;
+          border-radius:         100% / 50px;
+          z-index: -1;
+        }
+        img {
+          padding: 2px 7px;
+        }
+        p {
+          padding: 10px 0;
+          font-size: 1.1rem;
+          font-weight: bold;
+        }
+      }
+    }
+  div.card {
+    margin-top: 50px;
+    width: 100%;
+    height:135px;
+    background: black url("/assets/img/foodtruck_2.jpg") center center no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border-radius: 10px;
+    overflow: hidden;
+    div.header {
+      position: absolute;
+      margin-top: -15px;
+      margin-left: 15px;
+      p, img {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+      p {
+        background-color: $orange;
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: .9rem;
+      }
+      img {
+        width: 20px;
+        background-color: $bleu-clair;
+        border-radius: 100%;
+        padding: 5px;
+      }
+    }
+    div.button {
+      width: 200px;
+      height: 300px;
+      background-color: $orange;
+      float: right;
+      position: relative;
+      margin-top: -80px;
+      margin-right: -150px;
+      -webkit-border-radius: 100% / 500px;
+      -moz-border-radius:    100% / 500px;
+      border-radius:         100% / 500px;
+      img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 20px;
+        left: 15px;
+      }
+    }
+  }
+}
+
+body#favoris {
+  padding: 0 $padding-x-page;
+  margin-bottom: 65px;
+  h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-top: 25px;
+    span {
+      color: $orange;
+    }
+  }
+  p:first-of-type {
+    font-size: 1rem;
+  }
+  div.card {
+    margin-top: 50px;
+    width: 100%;
+    height:135px;
+    background: black url("/assets/img/foodtruck_2.jpg") center center no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border-radius: 10px;
+    overflow: hidden;
+    div.header {
+      position: absolute;
+      margin-top: -15px;
+      margin-left: 15px;
+      p, img {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+      p {
+        background-color: $orange;
+        padding: 5px 10px;
+        border-radius: 10px;
+        font-size: .9rem;
+      }
+      img {
+        width: 20px;
+        background-color: $bleu-clair;
+        border-radius: 100%;
+        padding: 5px;
+      }
+    }
+    div.button {
+      width: 200px;
+      height: 300px;
+      background-color: $orange;
+      float: right;
+      position: relative;
+      margin-top: -80px;
+      margin-right: -150px;
+      -webkit-border-radius: 100% / 500px;
+      -moz-border-radius:    100% / 500px;
+      border-radius:         100% / 500px;
+      img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 20px;
+        left: 15px;
+      }
+    }
   }
 }
 

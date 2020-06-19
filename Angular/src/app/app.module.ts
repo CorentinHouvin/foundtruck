@@ -22,6 +22,7 @@ import { UserService } from './services/user.service';
 // other
 import { AuthGuard } from "./auth/auth.guard";
 import { AuthInterceptor } from "./auth/auth.interceptor";
+import { FoodtruckComponent } from './pages/foodtruck/foodtruck.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { AuthInterceptor } from "./auth/auth.interceptor";
     NavbarComponent,
     HomeComponent,
     SearchComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    FoodtruckComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,81 @@
-<p>search works!</p>
+<main>
+  <h1>Rechercher un <span>foodtruck</span></h1>
+  <p>Cherche le foodtruck qui te conviendra le mieux. </p>
+
+  <form>
+    <input type="text" name="" id="" placeholder="Rechercher (Burger, pizza, Paris...)">
+    <img src="/assets/img/nav/search.png" alt="">
+  </form>
+
+  <section class="category">
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/pizza.png" alt="">
+      <p>Pizzas</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/pasta.png" alt="">
+      <p>Italiens</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/burger.png" alt="">
+      <p>Burger</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/ice-cream.png" alt="">
+      <p>Glace</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/ramen.png" alt="">
+      <p>Japonais</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/rice.png" alt="">
+      <p>Asiatique</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/french-fries.png" alt="">
+      <p>Américain</p>
+    </div>
+
+    <div>
+      <div>
+      </div>
+      <img src="/assets/img/category/lettuce.png" alt="">
+      <p>Salade</p>
+    </div>
+  </section>
+
+
+  <div *ngIf="foodtrucks">
+    <div class="card" *ngFor="let foodtruck of foodtrucks">
+      <div class="header">
+        <p>{{ foodtruck.name }}</p>
+        <img src="/assets/img/category/pizza.png" alt="">
+        <img src="/assets/img/category/burger.png" alt="">
+      </div>
+      <div class="button">
+        <a [routerLink]="['/recherche', foodtruck.slug]" [queryParams]="{_id: foodtruck._id}"><img src="/assets/img/plus.png" alt=""></a>
+      </div>
+    </div>
+  </div>
+</main>
